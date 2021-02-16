@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	"github.com/year-zero/dbg"
+	"github.com/eze-kiel/dbg"
 )
 
 func main() {

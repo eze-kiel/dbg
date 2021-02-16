@@ -9,7 +9,7 @@ Lightweight and easy-to-use embeddable debugger for Go.
 ## Getting started
 
 ```
-$ go get github.com/year-zero/dbg
+$ go get github.com/eze-kiel/dbg
 ```
 
 ## Usage

@@ -1,4 +1,4 @@
-module github.com/year-zero/dbg
+module github.com/eze-kiel/dbg
 
 go 1.15
 
