@@ -1,7 +1,6 @@
 package dbg
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -73,41 +72,27 @@ func Halt() {
 	os.Exit(127)
 }
 
-// Break stops the program so the user can interract with it
-func Break() {
+// Mem show memory usage at a point
+func Mem() {
 	pt := createPoint(2)
-	runtime.ReadMemStats(&pt.mem)
-
-	format := fmt.Sprintf("(pkg:%s|func:%s) %s:%d\t %s",
+	format := fmt.Sprintf("(pkg:%s|func:%s) %s:%d\tAlloc= %vMiB  TotalAlloc= %vMiB  Sys= %vMiB  NumGC= %v",
 		Bold(Cyan(pt.pkgName)),
 		Bold(Cyan(pt.funcName)),
 		pt.fileName,
 		BrightMagenta(pt.line),
-		Bold(Red("Break")),
+		bToMb(pt.mem.Alloc),
+		bToMb(pt.mem.TotalAlloc),
+		bToMb(pt.mem.Sys),
+		pt.mem.NumGC,
 	)
 	fmt.Fprintln(os.Stderr, format)
-	var input string
-	reader := bufio.NewReader(os.Stdin)
-
-	for {
-		fmt.Fprintf(os.Stdout, "cmd> ")
-		input, _ = reader.ReadString('\n')
-		input = strings.Replace(input, "\n", "", -1)
-
-		input = strings.ToLower(input)
-		switch input {
-		case "continue", "cont":
-			fmt.Fprintln(os.Stderr, "continuing...")
-			return
-		default:
-			pt.exec(input)
-		}
-	}
 }
 
 func createPoint(skip int) point {
 	var pt point
 	var ok bool
+	runtime.ReadMemStats(&pt.mem)
+
 	pt.pc, pt.filePath, pt.line, ok = runtime.Caller(skip)
 	if !ok {
 		log.Fatal("not ok") // change me pls
@@ -126,4 +111,8 @@ func createPoint(skip int) point {
 	}
 
 	return pt
+}
+
+func bToMb(b uint64) uint64 {
+	return b / 1024 / 1024
 }
