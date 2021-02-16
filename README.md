@@ -79,3 +79,7 @@ Output:
 ### Display memory stats
 
 `dbg.Mem()` allows you to see some memory informations. Its does not require any parameter.
+
+### Stop program execution
+
+`dbg.Halt()` allows you to stop the program execution.
