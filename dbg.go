@@ -59,7 +59,7 @@ func Printf(format string, a ...interface{}) {
 }
 
 // Halt exits the program
-func Halt() {
+func Halt(code int) {
 	pt := createPoint(2)
 	format := fmt.Sprintf("(pkg:%s|func:%s) %s:%d\t %s",
 		Bold(Cyan(pt.pkgName)),
@@ -69,7 +69,7 @@ func Halt() {
 		Bold(Red("Halted")),
 	)
 	fmt.Fprintln(os.Stderr, format)
-	os.Exit(127)
+	os.Exit(code)
 }
 
 // Mem show memory usage at a point

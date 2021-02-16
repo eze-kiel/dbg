@@ -28,5 +28,5 @@ func main() {
 	overall = nil
 
 	// Halt
-	dbg.Halt()
+	dbg.Halt(127)
 }

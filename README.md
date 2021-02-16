@@ -82,4 +82,4 @@ Output:
 
 ### Stop program execution
 
-`dbg.Halt()` allows you to stop the program execution.
+`dbg.Halt()` allows you to stop the program execution with a given error code.
