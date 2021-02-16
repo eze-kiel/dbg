@@ -20,6 +20,7 @@ Adding `dbg.Point()` somewhere in your program will display some informations ab
 
 <details><summary>Example</summary>
 <p>
+
 ```go
 func main() {
 	dbg.Point()
